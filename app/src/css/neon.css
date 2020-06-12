@@ -1,0 +1,456 @@
+/* PROGRESS BAR */
+
+#scrollPath {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+}
+#progressbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 10px;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(360deg);
+  }
+}
+#progressbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(10px);
+}
+
+#progressbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(30px);
+}
+
+/* body{
+  background-color: transparent;
+  color: #fff !important;
+} */
+
+/* NEON BUTTON */
+
+#neonButton {
+  position: relative;
+  color: #4353ff;
+  padding: 15px 30px;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#neonButton::before {
+  content: "";
+  position: relative;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  width: 50%;
+  background: rgba(255, 255, 255, 0.05);
+}
+#neonButton:hover {
+  color: #fff;
+  background: #1779ff;
+  box-shadow: 0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff;
+  transition-delay: 1s;
+}
+
+#neonButton span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #1779ff);
+  animation: animate1 2s linear infinite;
+}
+@keyframes animate1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+#neonButton:hover span:nth-child(1) {
+  left: -100%;
+  transition: 1s;
+}
+#neonButton span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #1779ff);
+  animation: animate2 2s linear infinite;
+  animation-delay: 1s;
+}
+@keyframes animate2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+#neonButton:hover span:nth-child(2) {
+  top: 100%;
+  transition: 1s;
+  transition-delay: 0.25s;
+}
+#neonButton span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #1779ff);
+  animation: animate3 2s linear infinite;
+}
+@keyframes animate3 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+#neonButton:hover span:nth-child(3) {
+  right: 100%;
+  transition: 1s;
+  transition-delay: 0.5s;
+}
+#neonButton span:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to top, transparent, #1779ff);
+  animation: animate4 2s linear infinite;
+  animation-delay: 1s;
+}
+@keyframes animate4 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+#neonButton:hover span:nth-child(4) {
+  bottom: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
+}
+
+/* DARK MODE CHECK */
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  visibility: hidden;
+  display: none;
+}
+
+.check {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background: #0e0d18;
+  cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: ease-in 0.5s;
+  z-index: -10;
+}
+
+input[type="checkbox"]:checked ~ .check {
+  background: #fff;
+  box-shadow: 0 0 0 3200px #0e0d18;
+}
+
+.check::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: #fff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+input[type="checkbox"]:checked ~ .check::before {
+  transform: translateX(-50px);
+}
+
+.check::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #0e0d18;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: 0.5s;
+  transform: translateX(50px);
+}
+input[type="checkbox"]:checked ~ .check::after {
+  transform: translateX(0px);
+}
+
+/* CARDS */
+
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.box {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #060c21;
+  margin: 40px;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: #fff;
+  z-index: -1;
+}
+.box::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: #fff;
+  z-index: -2;
+  filter: blur(40px);
+}
+
+/* .box:nth-child(1):before,
+.box:nth-child(1):after {
+  background: linear-gradient(235deg, #89ff00, #010615, #00bcd4);
+}
+.box:nth-child(2):before,
+.box:nth-child(2):after {
+  background: linear-gradient(235deg, #ff0052, #010615, #fbff00);
+} */
+.box::before,
+.box::after {
+  background: linear-gradient(235deg, #772aff, #010615, #2196f3);
+}
+
+.box .glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.box .content {
+  padding: 20px;
+  color: #fff;
+}
+
+/* NAVBAR */
+nav {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+nav a {
+  position: relative;
+  margin: 0 20px;
+  text-decoration: none;
+  font-family: "MADE Evolve Sans Light EVO";
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+nav #marker {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: #1779ff;
+  bottom: -2px;
+  transition: 0.5s;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff;
+}
+
+@media only screen and (max-width: 767px) {
+  nav {
+    display: none;
+  }
+}
+
+/* MENU */
+.bars {
+  position: absolute;
+  top: 30px;
+  right: 80px;
+}
+
+#menu {
+  display: none;
+}
+
+.toggle {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  border-radius: 5px;
+  background: #1779ff;
+  box-shadow: 0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toggle::before {
+  content: '';
+  background: #1779ff;
+  box-shadow: 0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff;
+  position: absolute;
+  height: 3px;
+  width: 40px;
+  border-radius: 5px;
+  transform: translateY(-12px);
+  transition: all 0.15s ease;
+}
+
+.toggle::after {
+  background: #1779ff;
+  box-shadow: 0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff;
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 50px;
+  border-radius: 5px;
+  transform: translateY(12px);
+  transition: all 0.15s ease;
+}
+
+#menu:checked + .toggle {width: 0;}
+#menu:checked + .toggle::before {
+  transform: rotate(45deg);
+}
+#menu:checked + .toggle::after {
+  transform: rotate(-45deg);
+  width: 40px;
+}
+@media only screen and (min-width: 767px) {
+  .bars {
+    display: none;
+  }
+}
+
+/* BANNER */
+.banner {
+  width: 100%;
+  transition: 0.5s;
+}
+
+.banner.active{
+  transform: translateX(-100%);
+}
+
+#navigation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100vh;
+  /* background-color: #0e0d18; */
+  display: grid;
+  place-items: center;
+  transition: 0.5s;
+}
+
+#navigation.active {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  /* background-color: #0e0d18; */
+  display: grid;
+  place-items: center;
+  transition: 0.5s;
+}
+
+#navigation ul {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#navigation ul li {
+  list-style: none;
+}
+#navigation ul li a {
+  /* color: #1779ff; */
+  /* text-shadow: 0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff;  */
+  text-decoration: none;
+  display: inline-block;
+  font-family: "MADE Evolve Sans Light EVO";
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+#socialIcons.active {
+  display: none;
+}

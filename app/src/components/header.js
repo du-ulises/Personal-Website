@@ -1,11 +1,12 @@
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import { Typography } from "@material-ui/core"
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      background: `#A3A4A5`,
       marginBottom: `1.45rem`,
     }}
   >
@@ -17,15 +18,9 @@ const Header = ({ siteTitle }) => (
       }}
     >
       <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+        <Typography>
           {siteTitle}
-        </Link>
+        </Typography>
       </h1>
     </div>
   </header>

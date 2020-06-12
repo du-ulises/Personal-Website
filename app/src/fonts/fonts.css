@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "Acrom ExtraBold";
+  src: url("Acrom-ExtraBold.woff");
+}
+
+@font-face {
+  font-family: "Acrom Light";
+  src: url("Acrom-Light.woff");
+}
+
+@font-face {
+  font-family: "Acrom Medium";
+  src: url("Acrom-Medium.woff");
+}
+
+@font-face {
+  font-family: "Acrom Regular";
+  src: url("Acrom-Regular.woff");
+}
+
+@font-face {
+  font-family: "Acrom Thin";
+  src: url("Acrom-Thin.woff");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Bold EVO";
+  src: url("MADE Evolve Sans Bold EVO.otf");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Light EVO";
+  src: url("MADE Evolve Sans Light EVO.otf");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Medium EVO";
+  src: url("MADE Evolve Sans Medium EVO.otf");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Regular EVO";
+  src: url("MADE Evolve Sans Regular EVO.otf");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Thin EVO";
+  src: url("MADE Evolve Sans Thin EVO.otf");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Light";
+  src: url("MADE Evolve Sans Light.otf");
+}
