@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import styled, { css } from "styled-components"
 import { Flex, Box } from "grid-styled"
 import scrollToElement from "scroll-to-element"
-
+import { motion, AnimatePresence } from "framer-motion"
+import { navigate } from "gatsby" //import navigate from gatsby
 import { media } from "../utils/style"
 import "../css/neon.css"
 
@@ -81,7 +82,6 @@ function NavBar(props) {
       marker.style.left = e.offsetLeft + "px"
       marker.style.width = e.offsetWidth + "px"
     }
-    /* Add click to currently iterated link node in NodeList result */
     link.addEventListener("mousemove", e => {
       indicator(e.target)
       console.log("event")
@@ -106,143 +106,118 @@ function NavBar(props) {
     }
   }, [])
 
-  // const changeSec = () => {
-  //   console.log("CHANGE SEC")
-  //   function toggle() {
-  //     var sec = document.getElementById("sec")
-  //     sec.classList.toggle("active")
-  //   }
-  // }
-
-  const linkMap = props.children
-    .map(el => {
-      if (el.props.id)
-        return {
-          name: el.props.children,
-          href: `#${el.props.id}`,
-          color: props.darkMode ? "#fff" : "#000",
-        }
-    })
-    .filter(n => n !== undefined)
-    .reverse()
-  const links = linkMap.map(function (link) {
-    return (
-      <li key={link.name}>
-        <a
-          onClick={() => {
-            scrollToElement(link.href)
-          }}
-          style={{
-            fontFamily: "MADE Evolve Sans Light EVO",
-            fontSize: 18,
-            color: link.color,
-          }}
-        >
-          {link.name}
-        </a>
-      </li>
-    )
-  })
   return (
     <Base {...props}>
       <Flex>
         <Box px={2} width={[1 / 2, 1 / 3, 2 / 6]}>
-          <strong
-            style={{
-              fontFamily: "MADE Evolve Sans Medium EVO",
-              fontSize: 24,
-              color: props.darkMode ? "#fff" : "#000",
-            }}
-          >
-            DUMA
-          </strong>
+          <AnimatePresence>
+            <motion.div
+              className="title"
+              initial={{ y: -150 }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+            >
+              <strong
+                style={{
+                  fontFamily: "MADE Evolve Sans Medium EVO",
+                  fontSize: 24,
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                DUMA
+              </strong>
+            </motion.div>
+          </AnimatePresence>
         </Box>
         <Box px={2} width={[0, 2 / 3, 4 / 6]}>
-          {/* <nav>
-            <div id="marker"></div>
-            <ul>{links}</ul>
-          </nav> */}
-          <nav>
-            <div id="marker"></div>
-            <a
-              onClick={() => {
-                scrollToElement("#about-me")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              About Me
-            </a>
-            <a
-              onClick={() => {
-                scrollToElement("#portfolio")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              Portfolio
-            </a>
-            <a
-              onClick={() => {
-                scrollToElement("#services")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              Services
-            </a>
-            <a
-              onClick={() => {
-                scrollToElement("#experience")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              Experience
-            </a>
-            <a
-              onClick={() => {
-                scrollToElement("#tech")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              Tech
-            </a>
-            <a
-              onClick={() => {
-                scrollToElement("#education")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              Education
-            </a>
-            <a
-              onClick={() => {
-                scrollToElement("#honoursAndAwards")
-              }}
-              style={{
-                color: props.darkMode ? "#fff" : "#000",
-              }}
-            >
-              Honours & Awards
-            </a>
-          </nav>
+          <motion.div
+            className="title"
+            initial={{ y: -250 }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+          >
+            <nav>
+              <div id="marker"></div>
+              <a
+                onClick={() => {
+                  scrollToElement("#about-me")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                About Me
+              </a>
+              <a
+                onClick={() => {
+                  navigate("/work")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                Work
+              </a>
+              <a
+                onClick={() => {
+                  scrollToElement("#services")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                Services
+              </a>
+              <a
+                onClick={() => {
+                  scrollToElement("#experience")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                Experience
+              </a>
+              <a
+                onClick={() => {
+                  scrollToElement("#tech")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                Tech
+              </a>
+              <a
+                onClick={() => {
+                  scrollToElement("#education")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                Education
+              </a>
+              <a
+                onClick={() => {
+                  scrollToElement("#honoursAndAwards")
+                }}
+                style={{
+                  color: props.darkMode ? "#fff" : "#000",
+                }}
+              >
+                Honours & Awards
+              </a>
+            </nav>
+          </motion.div>
         </Box>
       </Flex>
-        <div class="bars">
-          <label>
-            <input type="checkbox" id="menu" onChange={props.changeSec} />
-            <span class="toggle"></span>
-          </label>
-        </div>
+      <div class="bars">
+        <label>
+          <input type="checkbox" id="menu" onChange={props.changeSec} />
+          <span class="toggle"></span>
+        </label>
+      </div>
     </Base>
   )
 }

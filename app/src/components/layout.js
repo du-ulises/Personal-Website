@@ -5,9 +5,11 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
-// import { useStaticQuery, graphql } from "gatsby"
+import { motion, AnimatePresence } from "framer-motion"
+import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 
 // import Header from "./header"
 //import "./layout.css"
@@ -69,6 +71,41 @@ const Body = styled.div`
   }
 `
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 1.5, duration: 1.5 },
+  },
+  exit: {
+    x: "-100vh",
+    transition: { ease: "easeInOut" },
+  },
+}
+
+const duration = 0.5
+
+
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+    transition: {
+      duration: duration,
+      delay: duration,
+      when: 'beforeChildren',
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: duration },
+  },
+}
+
 const Layout = ({ location, children, handleChange }) => {
   // const data = useStaticQuery(graphql`
   //   query SiteTitleQuery {
@@ -80,7 +117,7 @@ const Layout = ({ location, children, handleChange }) => {
   //   }
   // `)
 
-  const [darkMode, setDarkMode] = React.useState(
+  const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") !== null
       ? localStorage.getItem("darkMode")
       : false
@@ -91,12 +128,44 @@ const Layout = ({ location, children, handleChange }) => {
     setDarkMode(!darkMode)
   }
 
+  const images = useStaticQuery(graphql`
+    query {
+      DeerDark: file(relativePath: { eq: "DeerDark.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 400) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      DeerLight: file(relativePath: { eq: "DeerLight.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 400) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
+
+  const [environment, setEnvironment] = useState({ language: "" })
+  const languages = ["EN", "|", "ES"]
+  const handleChangueLanguage = language => {
+    setEnvironment({ ...environment, language })
+  }
   return (
     <ThemeProvider theme={theme}>
       <Body>
         <GlobalStyle />
-        {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
       </Body>
+      
+      <AnimatePresence>
+        <motion.main
+          key={location.pathname}
+          variants={variants}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
       {location &&
         (location.pathname !== "/404" ||
           location.pathname !== "/comming-soon") && (
@@ -114,6 +183,83 @@ const Layout = ({ location, children, handleChange }) => {
                 textAlign: "center",
               }}
             >
+              <motion.div
+                className="home container"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <AnimatePresence>
+                  {darkMode ? (
+                    <Img
+                      imgStyle={{ objectFit: "contain" }}
+                      style={{ margin: "1rem", maxHeight: "50px" }}
+                      fluid={images.DeerLight.childImageSharp.fluid}
+                    />
+                  ) : (
+                    <Img
+                      imgStyle={{ objectFit: "contain" }}
+                      style={{ margin: "1rem", maxHeight: "50px" }}
+                      fluid={images.DeerDark.childImageSharp.fluid}
+                    />
+                  )}
+                </AnimatePresence>
+              </motion.div>
+              <Grid container alignItems="center" justify="center" spacing={1}>
+                {languages.map(language => {
+                  let spanClass =
+                    environment.language === language ? "active" : ""
+                  return (
+                    <motion.li
+                      key={language}
+                      onClick={() => {
+                        if (language !== "|") {
+                          handleChangueLanguage(language)
+                        }
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        originX: 0,
+                        color: "#1779ff",
+                      }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <span
+                        className={spanClass}
+                        style={{
+                          color:
+                            environment.language === language
+                              ? darkMode
+                                ? "#4353ff"
+                                : "#0101B6"
+                              : darkMode
+                              ? "#fff"
+                              : "#000",
+                        }}
+                      >
+                        <Typography
+                          style={{
+                            marginBottom: 5,
+                            color:
+                              environment.language === language
+                                ? darkMode
+                                  ? "#4353ff"
+                                  : "#0101B6"
+                                : darkMode
+                                ? "#fff"
+                                : "#000",
+                            display: "inline",
+                          }}
+                        >
+                          {language}
+                        </Typography>
+                      </span>
+                    </motion.li>
+                  )
+                })}
+              </Grid>
+
               <Grid container alignItems="center" justify="center" spacing={1}>
                 <Grid item>
                   <Typography
@@ -153,6 +299,8 @@ const Layout = ({ location, children, handleChange }) => {
             </footer>
           </div>
         )}
+      </motion.main>
+    </AnimatePresence>
     </ThemeProvider>
   )
 }

@@ -151,6 +151,22 @@ const IndexPage = props => {
       let progressHeight = (window.pageYOffset / totalHeight) * 100
       progress.style.height = progressHeight + "%"
     }
+    const cursor = document.querySelector(".cursor")
+
+    document.addEventListener("mousemove", e => {
+      cursor.setAttribute(
+        "style",
+        "top: " + (e.pageY - 10) + "px; left: " + (e.pageX - 10) + "px;"
+      )
+    })
+
+    document.addEventListener("click", () => {
+      cursor.classList.add("expand")
+
+      setTimeout(() => {
+        cursor.classList.remove("expand")
+      }, 500)
+    })
   }, [])
 
   const [darkMode, setDarkMode] = React.useState(
@@ -160,13 +176,12 @@ const IndexPage = props => {
   )
 
   const changeSec = () => {
-    console.log("CHANGE SEC")
     var sec = document.getElementById("sec")
-    var navigation = document.getElementById("navigation")
-    var socialIcons = document.getElementById("socialIcons")
-    sec.classList.toggle("active")
-    navigation.classList.toggle("active")
-    socialIcons.classList.toggle("active")
+    try {
+      sec.classList.toggle("active")
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   var content = (
@@ -239,7 +254,7 @@ const IndexPage = props => {
           </Link>
         </Flex>
       </Section>
-      <a id="portfolio">Portfolio</a>
+      <a id="work">Work</a>
       <a id="services">Services</a>
       <a id="experience">Experience</a>
       <a id="tech">Tech</a>
@@ -249,26 +264,38 @@ const IndexPage = props => {
   )
   return (
     <>
-      <section class="banner" id="sec">
-        <Layout
-          location={props.location}
-          handleChange={() => {
-            setDarkMode(!darkMode)
+      <div class="cursor"></div>
+      {/* <div className="boxAnimatedBackground">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div> */}
+      <Layout
+        location={props.location}
+        handleChange={() => {
+          setDarkMode(!darkMode)
+        }}
+      >
+        <SEO title="Home" />
+        <div id="progressbar"></div>
+        <div id="scrollPath"></div>
+        <NavBar
+          main
+          children={content.props.children}
+          darkMode={darkMode}
+          changeSec={() => {
+            changeSec()
           }}
-        >
-          <SEO title="Home" />
-          <div id="progressbar"></div>
-          <div id="scrollPath"></div>
-          <NavBar
-            main
-            children={content.props.children}
-            darkMode={darkMode}
-            changeSec={() => {
-              changeSec()
-            }}
-          />
-          {content}
-          {/* <h1>Hi people</h1>
+        />
+        {content}
+        {/* <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
@@ -276,151 +303,7 @@ const IndexPage = props => {
     </div>
     <Link to="/page-2/">Go to page 2</Link> <br />
     <Link to="/using-typescript/">Go to "Using TypeScript"</Link> */}
-        </Layout>
-      </section>
-      <div
-        id="navigation"
-        style={{
-          backgroundColor: darkMode ? "#0e0d18" : "#fff",
-        }}
-      >
-        <ul>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#about-me")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              About Me
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#portfolio")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              Portfolio
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#services")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              Services
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#experience")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              Experience
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#tech")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              Tech
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#education")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              Education
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                scrollToElement("#honoursAndAwards")
-              }}
-              style={{
-                color: darkMode ? "#4353ff" : "#000",
-                textShadow: darkMode
-                  ? "0 0 10px #1779ff, 0 0 40px #1779ff, 0 0 80px #1779ff"
-                  : "none",
-              }}
-            >
-              Honours & Awards
-            </a>
-          </li>
-        </ul>
-        <div id="socialIconsNav">
-        <SocialIcons
-          style={{
-            position: "absolute",
-            margin: "0 auto",
-            left: 0,
-            right: 0,
-            bottom: 80,
-          }}
-          icons={[
-            {
-              name: "LinkedInIcon",
-              href: "www.linkedin.com/in/diegoulises",
-              color: darkMode ? "#fff" : "#000",
-            },
-            {
-              name: "GitHubIcon",
-              href: "https://github.com/Diego-Ulises",
-              color: darkMode ? "#fff" : "#000",
-            },
-            {
-              name: "InstagramIcon",
-              href: "https://www.instagram.com/diego.ulisess/",
-              color: darkMode ? "#fff" : "#000",
-            },
-          ]}
-          darkMode={darkMode}
-        />
-      </div>
-      </div>
+      </Layout>
     </>
   )
 }
