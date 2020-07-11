@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "gatsby"
 // import { navigate } from "gatsby"
 // import styled from "styled-components"
@@ -10,16 +10,22 @@ import "../css/neon.css"
 import { useTheme } from "@material-ui/core/styles"
 
 const NotFoundPage = props => {
-  const [darkMode, setDarkMode] = React.useState(
-    localStorage.getItem("darkMode") !== null
-      ? localStorage.getItem("darkMode")
-      : false
-  )
+  const [darkMode, setDarkMode] = React.useState(false)
 
   const theme = useTheme()
-  var windowWidth = window.innerWidth
+  var windowWidth = 0
   var breakpointWidth = theme.breakpoints.values.md
-  var isSmallScreen = windowWidth < breakpointWidth
+  var isSmallScreen = false
+
+  useEffect(() => {
+    setDarkMode(
+      localStorage.getItem("darkMode") !== null
+        ? localStorage.getItem("darkMode")
+        : false
+    )
+    windowWidth = window.innerWidth
+    isSmallScreen = windowWidth < breakpointWidth
+  }, [])
 
   return (
     <Layout

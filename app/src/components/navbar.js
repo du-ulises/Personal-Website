@@ -74,20 +74,6 @@ const Base = styled.div`
 `
 
 function NavBar(props) {
-  var marker = document.querySelector("#marker")
-  var item = document.querySelectorAll("nav a")
-
-  for (const link of item) {
-    function indicator(e) {
-      marker.style.left = e.offsetLeft + "px"
-      marker.style.width = e.offsetWidth + "px"
-    }
-    link.addEventListener("mousemove", e => {
-      indicator(e.target)
-      console.log("event")
-      console.log(e)
-    })
-  }
   useEffect(() => {
     var marker = document.querySelector("#marker")
     var item = document.querySelectorAll("nav a")
@@ -100,8 +86,8 @@ function NavBar(props) {
       /* Add click to currently iterated link node in NodeList result */
       link.addEventListener("mousemove", e => {
         indicator(e.target)
-        console.log("event")
-        console.log(e)
+        // console.log("event")
+        // console.log(e)
       })
     }
   }, [])
@@ -212,10 +198,10 @@ function NavBar(props) {
           </motion.div>
         </Box>
       </Flex>
-      <div class="bars">
+      <div className="bars">
         <label>
           <input type="checkbox" id="menu" onChange={props.changeSec} />
-          <span class="toggle"></span>
+          <span className="toggle"></span>
         </label>
       </div>
     </Base>

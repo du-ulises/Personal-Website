@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -37,9 +37,14 @@ const containerVariants = {
 const CoomingSoon = props => {
   const classes = useStyles()
   const theme = useTheme()
-  var windowWidth = window.innerWidth
+  var windowWidth = 0
   var breakpointWidth = theme.breakpoints.values.md
-  var isSmallScreen = windowWidth < breakpointWidth
+  var isSmallScreen = false
+
+  useEffect(() => {
+    windowWidth = window.innerWidth
+    isSmallScreen = windowWidth < breakpointWidth
+  }, [])
   const images = useStaticQuery(graphql`
     query {
       DeerDark: file(relativePath: { eq: "DeerDark.png" }) {

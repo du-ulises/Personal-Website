@@ -145,6 +145,11 @@ const Section = styled.div`
 
 const IndexPage = props => {
   useEffect(() => {
+    setDarkMode(
+      localStorage.getItem("darkMode") !== null
+        ? localStorage.getItem("darkMode")
+        : false
+    )
     let progress = document.getElementById("progressbar")
     let totalHeight = document.body.scrollHeight - window.innerHeight
     window.onscroll = function () {
@@ -169,11 +174,7 @@ const IndexPage = props => {
     })
   }, [])
 
-  const [darkMode, setDarkMode] = React.useState(
-    localStorage.getItem("darkMode") !== null
-      ? localStorage.getItem("darkMode")
-      : false
-  )
+  const [darkMode, setDarkMode] = React.useState(false)
 
   const changeSec = () => {
     var sec = document.getElementById("sec")
@@ -240,7 +241,7 @@ const IndexPage = props => {
               cras integer faucibus class ultricies.
             </Typography>
           </Box>
-          <Cards />
+          {/* <Cards /> */}
           <Link
             to="/comming-soon"
             id="neonButton"
@@ -264,8 +265,8 @@ const IndexPage = props => {
   )
   return (
     <>
-      <div class="cursor"></div>
-      {/* <div className="boxAnimatedBackground">
+      <div className="cursor"></div>
+      <div className="boxAnimatedBackground">
         <div></div>
         <div></div>
         <div></div>
@@ -276,7 +277,7 @@ const IndexPage = props => {
         <div></div>
         <div></div>
         <div></div>
-      </div> */}
+      </div>
       <Layout
         location={props.location}
         handleChange={() => {

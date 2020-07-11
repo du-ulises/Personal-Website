@@ -11,7 +11,7 @@ import "../css/neon.css"
 import "../components/substance/styles.css"
 import { Typography } from "@material-ui/core"
 import { navigate } from "gatsby"
-import ReactHowler from 'react-howler'
+import ReactHowler from "react-howler"
 
 function Startup() {
   const ref = useRef()
@@ -39,7 +39,7 @@ function Paragraph({ image, index, offset, factor, header, aspect, text }) {
   const alignRight = (canvasWidth - w * size - margin) / 2
   const pixelWidth = w * state.zoom * size
   const left = !(index % 2)
-  const color = index % 2 ? "#D40749" : "#2FE8C3"
+  const color = index % 2 ? "#d4af37" : "#d9d9d9" 
   return (
     <Block factor={factor} offset={offset}>
       <group position={[left ? -alignRight : alignRight, 0, 0]}>
@@ -155,7 +155,11 @@ function Content() {
       <Block factor={1.25} offset={8}>
         <Dom
           className="bottom-left"
-          position={mobile ? [-canvasWidth / 4, -canvasHeight / 2, 0] : [-canvasWidth / 2, -canvasHeight / 2, 0]}
+          position={
+            mobile
+              ? [-canvasWidth / 4, -canvasHeight / 2, 0]
+              : [-canvasWidth / 2, -canvasHeight / 2, 0]
+          }
         >
           #BoostYourBrand.
         </Dom>
@@ -167,11 +171,13 @@ function Content() {
 function App() {
   const scrollArea = useRef()
   const onScroll = e => (state.top.current = e.target.scrollTop)
+  const [playing, setPlaying] = useState(false)
+  const [sound, setSound] = useState(false)
+
   useEffect(() => {
+    setPlaying(window.screen.width < 700 ? false : true)
     onScroll({ target: scrollArea.current })
   }, [])
-
-  const [playing, setPlaying] = useState(window.screen.width < 700 ? false : true)
 
   return (
     <div id="root">
@@ -212,28 +218,92 @@ function App() {
         <div className="frame__nav">
           <a
             className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
             href="#00"
             children="DUMA"
             style={{ fontFamily: "MADE Evolve Sans Bold EVO", color: "#fff" }}
           />
-          <a className="frame__link" href="#01" children="01" />
-          <a className="frame__link" href="#02" children="02" />
-          <a className="frame__link" href="#03" children="03" />
-          <a className="frame__link" href="#04" children="04" />
-          <a className="frame__link" href="#05" children="05" />
-          <a className="frame__link" href="#07" children="06" />
+          <a
+            className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            href="#01"
+            children="01"
+          />
+          <a
+            className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            href="#02"
+            children="02"
+          />
+          <a
+            className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            href="#03"
+            children="03"
+          />
+          <a
+            className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            href="#04"
+            children="04"
+          />
+          <a
+            className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            href="#05"
+            children="05"
+          />
+          <a
+            className="frame__link"
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            href="#07"
+            children="06"
+          />
         </div>
-        <div className="frame__links">
+        {/* <div className="frame__links">
           <a
             className="frame__link"
             onClick={() => {
               navigate("/")
             }}
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
             style={{ cursor: "pointer", color: "#fff" }}
           >
             HOME
           </a>
-        </div>
+        </div> */}
       </div>
       <div
         className="footer-sound"
@@ -247,6 +317,11 @@ function App() {
           //   audio.currentTime = 0
           // }
         }}
+        onMouseEnter={() => {
+          if (playing) {
+            setSound(true)
+          }
+        }}
       >
         {/* <audio id="audio" src="/Tides of time.mp3" autoPlay loop/> */}
         <span id="bar-1" className={playing ? "sbar" : "sbar noAnim"}></span>
@@ -254,10 +329,17 @@ function App() {
         <span id="bar-3" className={playing ? "sbar" : "sbar noAnim"}></span>
         <span id="bar-4" className={playing ? "sbar" : "sbar noAnim"}></span>
         <ReactHowler
-            src={['/audio/Tides of time.mp3', '/audio/Blue.mp3']}
-            playing={playing}
-            loop={true}
-          />
+          src={["/audio/Tides of time.mp3", "/audio/Blue.mp3"]}
+          playing={playing}
+          loop={true}
+        />
+        <ReactHowler
+          src={["/audio/sound.mp3"]}
+          playing={sound}
+          onEnd={() => {
+            setSound(false)
+          }}
+        />
       </div>
     </div>
   )

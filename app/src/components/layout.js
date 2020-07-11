@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { motion, AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
@@ -14,6 +14,7 @@ import Img from "gatsby-image"
 // import Header from "./header"
 //import "./layout.css"
 import "../fonts/fonts.css"
+import "../css/neon.css"
 
 import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/styles"
@@ -87,7 +88,6 @@ const containerVariants = {
 
 const duration = 0.5
 
-
 const variants = {
   initial: {
     opacity: 0,
@@ -97,7 +97,7 @@ const variants = {
     transition: {
       duration: duration,
       delay: duration,
-      when: 'beforeChildren',
+      when: "beforeChildren",
     },
   },
   exit: {
@@ -117,16 +117,20 @@ const Layout = ({ location, children, handleChange }) => {
   //   }
   // `)
 
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") !== null
-      ? localStorage.getItem("darkMode")
-      : false
-  )
+  const [darkMode, setDarkMode] = useState(false)
   const changeDarkMode = () => {
     handleChange()
     localStorage.setItem("darkMode", !darkMode)
     setDarkMode(!darkMode)
   }
+
+  useEffect(() => {
+    setDarkMode(
+      localStorage.getItem("darkMode") !== null
+        ? localStorage.getItem("darkMode")
+        : false
+    )
+  }, [])
 
   const images = useStaticQuery(graphql`
     query {
@@ -147,7 +151,7 @@ const Layout = ({ location, children, handleChange }) => {
     }
   `)
 
-  const [environment, setEnvironment] = useState({ language: "" })
+  const [environment, setEnvironment] = useState({ language: "EN" })
   const languages = ["EN", "|", "ES"]
   const handleChangueLanguage = language => {
     setEnvironment({ ...environment, language })
@@ -157,150 +161,160 @@ const Layout = ({ location, children, handleChange }) => {
       <Body>
         <GlobalStyle />
       </Body>
-      
+
       <AnimatePresence>
         <motion.main
-          key={location.pathname}
+          key={location?.pathname}
           variants={variants}
           initial="initial"
           animate="enter"
           exit="exit"
         >
-      {location &&
-        (location.pathname !== "/404" ||
-          location.pathname !== "/comming-soon") && (
-          <div
-            style={{
-              margin: `0 auto`,
-              maxWidth: 960,
-              padding: `0 1.0875rem 1.45rem`,
-            }}
-          >
-            <main>{children}</main>
-            <footer
-              style={{
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <motion.div
-                className="home container"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+          {location &&
+            (location?.pathname !== "/404" ||
+              location?.pathname !== "/comming-soon") && (
+              <div
+                style={{
+                  margin: `0 auto`,
+                  maxWidth: 960,
+                  padding: `0 1.0875rem 1.45rem`,
+                }}
               >
-                <AnimatePresence>
-                  {darkMode ? (
-                    <Img
-                      imgStyle={{ objectFit: "contain" }}
-                      style={{ margin: "1rem", maxHeight: "50px" }}
-                      fluid={images.DeerLight.childImageSharp.fluid}
-                    />
-                  ) : (
-                    <Img
-                      imgStyle={{ objectFit: "contain" }}
-                      style={{ margin: "1rem", maxHeight: "50px" }}
-                      fluid={images.DeerDark.childImageSharp.fluid}
-                    />
-                  )}
-                </AnimatePresence>
-              </motion.div>
-              <Grid container alignItems="center" justify="center" spacing={1}>
-                {languages.map(language => {
-                  let spanClass =
-                    environment.language === language ? "active" : ""
-                  return (
-                    <motion.li
-                      key={language}
-                      onClick={() => {
-                        if (language !== "|") {
-                          handleChangueLanguage(language)
-                        }
-                      }}
-                      whileHover={{
-                        scale: 1.2,
-                        originX: 0,
-                        color: "#1779ff",
-                      }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <span
-                        className={spanClass}
-                        style={{
-                          color:
-                            environment.language === language
-                              ? darkMode
-                                ? "#4353ff"
-                                : "#0101B6"
-                              : darkMode
-                              ? "#fff"
-                              : "#000",
-                        }}
-                      >
-                        <Typography
-                          style={{
-                            marginBottom: 5,
-                            color:
-                              environment.language === language
-                                ? darkMode
-                                  ? "#4353ff"
-                                  : "#0101B6"
-                                : darkMode
-                                ? "#fff"
-                                : "#000",
-                            display: "inline",
-                          }}
-                        >
-                          {language}
-                        </Typography>
-                      </span>
-                    </motion.li>
-                  )
-                })}
-              </Grid>
-
-              <Grid container alignItems="center" justify="center" spacing={1}>
-                <Grid item>
-                  <Typography
-                    style={{
-                      marginBottom: 5,
-                      color: darkMode ? "#fff" : "#000",
-                    }}
-                  >
-                    Night mode
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={darkMode}
-                      onChange={changeDarkMode}
-                    />
-                    <span class="check"></span>
-                  </label>
-                </Grid>
-              </Grid>
-
-              <Typography style={{ color: darkMode ? "#fff" : "#000" }}>
-                © {new Date().getFullYear()}, Built with
-                {` `}
-                <a
-                  href="https://www.gatsbyjs.org"
+                <main>{children}</main>
+                <footer
                   style={{
-                    color: darkMode ? "#4353ff" : "#0101B6",
-                    textDecoration: "none",
+                    alignItems: "center",
+                    textAlign: "center",
                   }}
                 >
-                  Gatsby
-                </a>{" "}
-              </Typography>
-            </footer>
-          </div>
-        )}
-      </motion.main>
-    </AnimatePresence>
+                  <motion.div
+                    className="home container"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    <AnimatePresence>
+                      {darkMode ? (
+                        <Img
+                          imgStyle={{ objectFit: "contain" }}
+                          style={{ margin: "1rem", maxHeight: "50px" }}
+                          fluid={images.DeerLight.childImageSharp.fluid}
+                        />
+                      ) : (
+                        <Img
+                          imgStyle={{ objectFit: "contain" }}
+                          style={{ margin: "1rem", maxHeight: "50px" }}
+                          fluid={images.DeerDark.childImageSharp.fluid}
+                        />
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    spacing={1}
+                  >
+                    {languages.map(language => {
+                      let spanClass =
+                        environment.language === language ? "active" : ""
+                      return (
+                        <motion.li
+                          key={language}
+                          onClick={() => {
+                            if (language !== "|") {
+                              handleChangueLanguage(language)
+                            }
+                          }}
+                          whileHover={{
+                            scale: 1.2,
+                            originX: 0,
+                            color: "#1779ff",
+                          }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <span
+                            className={spanClass}
+                            style={{
+                              color:
+                                environment.language === language
+                                  ? darkMode
+                                    ? "#4353ff"
+                                    : "#0101B6"
+                                  : darkMode
+                                  ? "#fff"
+                                  : "#000",
+                            }}
+                          >
+                            <Typography
+                              style={{
+                                marginBottom: 5,
+                                color:
+                                  environment.language === language
+                                    ? darkMode
+                                      ? "#4353ff"
+                                      : "#0101B6"
+                                    : darkMode
+                                    ? "#fff"
+                                    : "#000",
+                                display: "inline",
+                              }}
+                            >
+                              {language}
+                            </Typography>
+                          </span>
+                        </motion.li>
+                      )
+                    })}
+                  </Grid>
+
+                  <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    spacing={1}
+                  >
+                    <Grid item>
+                      <Typography
+                        style={{
+                          marginBottom: 5,
+                          color: darkMode ? "#fff" : "#000",
+                        }}
+                      >
+                        Night mode
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={darkMode}
+                          onChange={changeDarkMode}
+                        />
+                        <span class="check"></span>
+                      </label>
+                    </Grid>
+                  </Grid>
+
+                  <Typography style={{ color: darkMode ? "#fff" : "#000" }}>
+                    © {new Date().getFullYear()}, Built with
+                    {` `}
+                    <a
+                      href="https://www.gatsbyjs.org"
+                      style={{
+                        color: darkMode ? "#4353ff" : "#0101B6",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Gatsby
+                    </a>{" "}
+                  </Typography>
+                </footer>
+              </div>
+            )}
+        </motion.main>
+      </AnimatePresence>
     </ThemeProvider>
   )
 }
