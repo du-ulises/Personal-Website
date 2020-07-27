@@ -161,7 +161,7 @@ function Content() {
               : [-canvasWidth / 2, -canvasHeight / 2, 0]
           }
         >
-          #BoostYourBrand.
+          #BoostYourBrand
         </Dom>
       </Block>
     </>
@@ -216,6 +216,21 @@ function App() {
           Designer, Developer & Engineer
         </h1>
         <div className="frame__nav">
+        <a
+            className="frame__link"
+            onClick={() => {
+              navigate("/")
+            }}
+            onMouseEnter={() => {
+              if (playing) {
+                setSound(true)
+              }
+            }}
+            children="DUMA"
+            style={{ fontFamily: "MADE Evolve Sans Bold EVO", color: "#fff" }}
+          >
+            DUMA
+          </a>
           <a
             className="frame__link"
             onMouseEnter={() => {
@@ -224,8 +239,7 @@ function App() {
               }
             }}
             href="#00"
-            children="DUMA"
-            style={{ fontFamily: "MADE Evolve Sans Bold EVO", color: "#fff" }}
+            children="00"
           />
           <a
             className="frame__link"

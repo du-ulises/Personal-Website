@@ -2,7 +2,6 @@ import React, { useEffect } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-//import Image from "../components/image"
 import SEO from "../components/seo"
 
 import { Flex, Box } from "grid-styled"
@@ -12,11 +11,12 @@ import { media } from "../utils/style"
 import NavBar from "../components/navbar"
 import HeroText from "../components/heroText"
 import SocialIcons from "../components/socialIcons"
-import Cards from "../components/card"
+import Tech from "../components/tech"
 
 import "../css/neon.css"
 import { Typography } from "@material-ui/core"
-import scrollToElement from "scroll-to-element"
+
+import { motion, AnimatePresence } from "framer-motion"
 
 const Content = styled.div`
   & > a {
@@ -172,6 +172,29 @@ const IndexPage = props => {
         cursor.classList.remove("expand")
       }, 500)
     })
+    var Emblem = {
+      init: function (el, str) {
+        var element = document.querySelector(el)
+        var text = str ? str : element.innerHTML
+        element.innerHTML = ""
+        for (var i = 0; i < text.length; i++) {
+          var letter = text[i]
+          var span = document.createElement("span")
+          var node = document.createTextNode(letter)
+          var r = (360 / text.length) * i
+          var x = (Math.PI / text.length).toFixed(0) * i
+          var y = (Math.PI / text.length).toFixed(0) * i
+          span.appendChild(node)
+          span.style.webkitTransform =
+            "rotateZ(" + r + "deg) translate3d(" + x + "px," + y + "px,0)"
+          span.style.transform =
+            "rotateZ(" + r + "deg) translate3d(" + x + "px," + y + "px,0)"
+          element.appendChild(span)
+        }
+      },
+    }
+
+    Emblem.init(".emblem")
   }, [])
 
   const [darkMode, setDarkMode] = React.useState(false)
@@ -188,6 +211,29 @@ const IndexPage = props => {
   var content = (
     <Content>
       <HeroText darkMode={darkMode} text="" />
+      <div
+        id="me"
+        style={{
+          position: "absolute",
+          margin: "0 0",
+          left: 0,
+          right: 0,
+          bottom: -5,
+        }}
+      >
+        <motion.div
+          className="title"
+          initial={{ y: -250 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+        >
+          <AnimatePresence>
+            <img src="/bg/uli1.png" id="uli" />
+            <span className="slide"></span>
+            <span className="slide2"></span>
+          </AnimatePresence>
+        </motion.div>
+      </div>
       <div id="socialIcons">
         <SocialIcons
           style={{
@@ -229,21 +275,56 @@ const IndexPage = props => {
         >
           About Me
         </Title>
+        <div
+          className="emblem"
+          style={{
+            fontFamily: "MADE Evolve Sans Regular EVO",
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          {" "}
+          * Diego * Ulises * Martínez * Aguilar
+        </div>
         <Flex alignItems="center" flexDirection="column">
           <Box px={2} width={[1, 2 / 3]}>
             <Typography style={{ color: darkMode ? "#a3a3a3" : "#4e4e4e" }}>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit cubilia
-              eleifend, lectus ullamcorper natoque neque molestie lacus velit
-              pretium imperdiet, enim ante quam mattis porta dui tortor
-              praesent. Torquent habitasse varius natoque ridiculus mattis
-              vestibulum praesent platea ullamcorper aliquet, massa donec
-              senectus cum id sapien erat taciti facilisi, tellus aenean felis a
-              cras integer faucibus class ultricies.
+              I'm a Frontend Web & Mobile Developer and Designer, currently
+              working in a digital development agency,{" "}
+              <a
+                href="https://digitalignition.com.mx/en/home/"
+                target="_blank"
+                style={{
+                  color: darkMode ? "#fff" : "#000",
+                  fontFamily: "MADE Evolve Sans Regular EVO",
+                }}
+              >
+                <strong>Digital Ignition,</strong>
+              </a>{" "}
+              as Android Coordinator in Morelia, Mich. <br />
+              <br />
+              After more than 5 years as Computer Systems Engineering student I
+              have discovered a passion for programming and development. Since
+              2019 I've mostly been working on front-end web development and
+              UX/UI Design.
             </Typography>
           </Box>
+        </Flex>
+      </Section>
+      <a id="work">Work</a>
+      <Section>
+        <Title
+          style={{
+            fontFamily: "MADE Evolve Sans Medium EVO",
+            fontSize: 24,
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          Work
+        </Title>
+        <Flex alignItems="center" flexDirection="column">
           {/* <Cards /> */}
           <Link
-            to="/comming-soon"
+            to="/work"
             id="neonButton"
             style={{ fontFamily: "MADE Evolve Sans Medium EVO" }}
           >
@@ -251,33 +332,78 @@ const IndexPage = props => {
             <span></span>
             <span></span>
             <span></span>
-            See more
+            Study Cases
           </Link>
         </Flex>
       </Section>
-      <a id="work">Work</a>
       <a id="services">Services</a>
+      <Section>
+        <Title
+          style={{
+            fontFamily: "MADE Evolve Sans Medium EVO",
+            fontSize: 24,
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          Services
+        </Title>
+      </Section>
       <a id="experience">Experience</a>
+      <Section>
+        <Title
+          style={{
+            fontFamily: "MADE Evolve Sans Medium EVO",
+            fontSize: 24,
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          Experience
+        </Title>
+      </Section>
       <a id="tech">Tech</a>
+
+      <Section>
+        <Title
+          style={{
+            fontFamily: "MADE Evolve Sans Medium EVO",
+            fontSize: 24,
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          Tech
+        </Title>
+        <Tech />
+      </Section>
       <a id="education">Education</a>
+      <Section>
+        <Title
+          style={{
+            fontFamily: "MADE Evolve Sans Medium EVO",
+            fontSize: 24,
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          Education
+        </Title>
+      </Section>
       <a id="honoursAndAwards">Honours & Awards</a>
+      <Section>
+        <Title
+          style={{
+            fontFamily: "MADE Evolve Sans Medium EVO",
+            fontSize: 24,
+            color: darkMode ? "#fff" : "#000",
+          }}
+        >
+          Honours & Awards
+        </Title>
+      </Section>
     </Content>
   )
   return (
     <>
       <div className="cursor"></div>
-      <div className="boxAnimatedBackground">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+
       <Layout
         location={props.location}
         handleChange={() => {
@@ -296,14 +422,6 @@ const IndexPage = props => {
           }}
         />
         {content}
-        {/* <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link> */}
       </Layout>
     </>
   )

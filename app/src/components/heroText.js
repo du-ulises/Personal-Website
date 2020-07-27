@@ -230,7 +230,7 @@ const HeroText = ({ darkMode, text }) => {
           style={{ fontFamily: "Acrom Light", color: state ? "#fff" : "#000" }}
         >
           {" "}
-          Poor Life Decisions
+          Software Engineer
         </span>
         <Typist.Delay ms={100} />
         <span

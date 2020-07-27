@@ -18,7 +18,7 @@ const state = {
     {
       offset: 2,
       factor: 2.25,
-      header: "CoWorker",
+      header: "CoWorker Platform.",
       image: "/R2 COWORKER-02-01.jpg",
       aspect: 1.5037,
       text:
@@ -36,7 +36,7 @@ const state = {
     {
       offset: 4,
       factor: 2.0,
-      header: "Acamex",
+      header: "Acamex.",
       image: "/Acamex-01.jpg",
       aspect: 0.665,
       text:
@@ -54,7 +54,7 @@ const state = {
     {
       offset: 7,
       factor: 1.05,
-      header: "Sistema de Control Escolar",
+      header: "Sistema de Control Escolar Maristas.",
       image: "/Marista-01.jpg",
       aspect: 1.77,
       text: "Education and enlightenment.",

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import { Flex, Box } from "grid-styled"
 import scrollToElement from "scroll-to-element"
@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { navigate } from "gatsby" //import navigate from gatsby
 import { media } from "../utils/style"
 import "../css/neon.css"
+import ReactHowler from "react-howler"
 
 const Base = styled.div`
   padding: 0;
@@ -74,6 +75,8 @@ const Base = styled.div`
 `
 
 function NavBar(props) {
+  const [playing, setPlaying] = useState(false)
+  const [sound, setSound] = useState(false)
   useEffect(() => {
     var marker = document.querySelector("#marker")
     var item = document.querySelectorAll("nav a")
@@ -90,6 +93,8 @@ function NavBar(props) {
         // console.log(e)
       })
     }
+
+    setPlaying(window.screen.width < 700 ? false : true)
   }, [])
 
   return (
@@ -109,6 +114,7 @@ function NavBar(props) {
                   fontSize: 24,
                   color: props.darkMode ? "#fff" : "#000",
                 }}
+                id="duma-sound"
               >
                 DUMA
               </strong>
@@ -131,15 +137,21 @@ function NavBar(props) {
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
                 }}
+                onMouseEnter={() => {
+                  setSound(true)
+                }}
               >
                 About Me
               </a>
               <a
                 onClick={() => {
-                  navigate("/work")
+                  scrollToElement("#work")
                 }}
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
+                }}
+                onMouseEnter={() => {
+                  setSound(true)
                 }}
               >
                 Work
@@ -151,6 +163,9 @@ function NavBar(props) {
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
                 }}
+                onMouseEnter={() => {
+                  setSound(true)
+                }}
               >
                 Services
               </a>
@@ -160,6 +175,9 @@ function NavBar(props) {
                 }}
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
+                }}
+                onMouseEnter={() => {
+                  setSound(true)
                 }}
               >
                 Experience
@@ -171,6 +189,9 @@ function NavBar(props) {
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
                 }}
+                onMouseEnter={() => {
+                  setSound(true)
+                }}
               >
                 Tech
               </a>
@@ -181,6 +202,9 @@ function NavBar(props) {
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
                 }}
+                onMouseEnter={() => {
+                  setSound(true)
+                }}
               >
                 Education
               </a>
@@ -190,6 +214,9 @@ function NavBar(props) {
                 }}
                 style={{
                   color: props.darkMode ? "#fff" : "#000",
+                }}
+                onMouseEnter={() => {
+                  setSound(true)
                 }}
               >
                 Honours & Awards
@@ -203,6 +230,36 @@ function NavBar(props) {
           <input type="checkbox" id="menu" onChange={props.changeSec} />
           <span className="toggle"></span>
         </label>
+      </div>
+      <div
+        className="footer-sound-main"
+        onClick={() => {
+          setPlaying(!playing)
+          // var audio = document.getElementById("audio")
+          // if (audio.paused) {
+          //   audio.play()
+          // } else {
+          //   audio.pause()
+          //   audio.currentTime = 0
+          // }
+        }}
+        onMouseEnter={() => {
+          setSound(true)
+        }}
+      >
+        {/* <audio id="audio" src="/Tides of time.mp3" autoPlay loop/> */}
+        <span id="bar-1" className={playing ? "sbar" : "sbar noAnim"}></span>
+        <span id="bar-2" className={playing ? "sbar" : "sbar noAnim"}></span>
+        <span id="bar-3" className={playing ? "sbar" : "sbar noAnim"}></span>
+        <span id="bar-4" className={playing ? "sbar" : "sbar noAnim"}></span>
+        <ReactHowler src={["/audio/Blue.mp3"]} playing={playing} loop={true} />
+        <ReactHowler
+          src={["/audio/sound.mp3"]}
+          playing={sound}
+          onEnd={() => {
+            setSound(false)
+          }}
+        />
       </div>
     </Base>
   )
