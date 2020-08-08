@@ -12,6 +12,7 @@ import NavBar from "../components/navbar"
 import HeroText from "../components/heroText"
 import SocialIcons from "../components/socialIcons"
 import Tech from "../components/tech"
+import Experience from "../components/experience"
 
 import "../css/neon.css"
 import { Typography } from "@material-ui/core"
@@ -385,6 +386,7 @@ const IndexPage = props => {
         >
           Education
         </Title>
+        <Experience />
       </Section>
       <a id="honoursAndAwards">Honours & Awards</a>
       <Section>

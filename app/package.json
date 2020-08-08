@@ -27,9 +27,12 @@
     "react-fontawesome": "^1.7.1",
     "react-helmet": "^6.0.0",
     "react-howler": "^3.7.4",
+    "react-slick": "^0.27.4",
     "react-three-fiber": "4.0.0-beta.12",
     "react-typist": "^2.0.5",
+    "react-vertical-timeline-component": "^3.0.2",
     "scroll-to-element": "^2.0.3",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.1",
     "three": "^0.117.1"
   },

@@ -1,5 +1,13 @@
-/* PROGRESS BAR */
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+  display: none;
+}
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
+/* PROGRESS BAR */
 #scrollPath {
   position: fixed;
   top: 0;
@@ -208,7 +216,7 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked ~ .check {
   background: #fff;
-  box-shadow: 0 0 0 3200px #000000;
+  box-shadow: 0 0 0 6400px #000000;
 }
 
 .check::before {
@@ -795,6 +803,8 @@ li span.active::before {
 }
 #duma-sound {
   margin-left: 30px;
+  position: fixed;
+  top: 0;
 }
 
 @media screen and (min-width: 53em) {
@@ -969,6 +979,8 @@ li span.active::before {
   width: 1800px;
   height: 50px;
   background: #4353ff99;
+  /* background: linear-gradient(to right, transparent, #1779ff99) !important;
+  animation: animate 2s ease-out infinite; */
   transform: rotate(-45deg);
 }
 /* EMBLEM */
@@ -1021,4 +1033,47 @@ li span.active::before {
   }
 }
 
-/* TECH */
+/* TIMELINE */
+.vertical-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(to top, #000, #1779ff) !important;
+  background-size: 400% 400%;
+  animation: animate 5s ease-out infinite;
+}
+.vertical-timeline-element-icon {
+  opacity: 1 !important;
+}
+.vertical-timeline-element-date {
+  font-family: "MADE Evolve Sans Medium EVO" !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+.vertical-timeline--two-columns .vertical-timeline-element-content .vertical-timeline-element-date {
+  text-align: justify;
+}
+
+.vertical-timeline-element-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: none !important;
+  /* box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,.08), 0 3px 0 4px rgba(0,0,0,.05); */
+}
+
+.vertical-timeline-element-content {
+  position: relative;
+  margin-left: 60px;
+  background: #fff;
+  border-radius: .25em;
+  padding: 1em;
+  box-shadow: 0 3px 0 #1779ff;
+}

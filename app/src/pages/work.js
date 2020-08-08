@@ -9,7 +9,6 @@ import { Block, useBlock } from "../components/substance/blocks"
 import state from "../components/substance/store"
 import "../css/neon.css"
 import "../components/substance/styles.css"
-import { Typography } from "@material-ui/core"
 import { navigate } from "gatsby"
 import ReactHowler from "react-howler"
 

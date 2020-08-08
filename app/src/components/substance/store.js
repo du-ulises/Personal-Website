@@ -13,7 +13,7 @@ const state = {
       image: "/R1.jpg",
       aspect: 0.665,
       text:
-        "Two thousand pharmacologists and bio-chemists were subsidized. Six years later it was being produced commercially.",
+        "Agenda Cave is a mobile application made to measure for The Cave Barbershop so customers can schedule an appointment for any of the services they offer.",
     },
     {
       offset: 2,
@@ -22,7 +22,7 @@ const state = {
       image: "/R2 COWORKER-02-01.jpg",
       aspect: 1.5037,
       text:
-        "By Digital Ignition. The man who comes back through the Door in the Wall will never be quite the same as the man who went out. He will be wiser but less sure, happier but less self-satisfied, humbler in acknowledging his ignorance yet better equipped to understand the relationship of words to things, of systematic reasoning to the unfathomable mystery which it tries, forever vainly, to comprehend.",
+        "By Digital Ignition. Coworker Platform is a Business Management Systems in charge of automating the company's operational processes.",
     },
     {
       offset: 3,
@@ -31,7 +31,7 @@ const state = {
       image: "/R3 DESPENSA APP-01.jpg",
       aspect: 1.5,
       text:
-        "The substance can take you to heaven but it can also take you to hell. Or else to both, together or alternately. Or else (if you're lucky, or if you've made yourself ready) beyond either of them. And then beyond the beyond, back to where you started from — back to here, back to New Rotham sted, back to business as usual. Only now, of course, business as usual is completely different.",
+        "Despensa App is an e-commerce that helps you find products from your nearest store, provides tools to manage your pantry, shopping list, secure payments and more.",
     },
     {
       offset: 4,
@@ -40,7 +40,7 @@ const state = {
       image: "/Acamex-01.jpg",
       aspect: 0.665,
       text:
-        "By Digital Ignition. We’ve found that the people whose EEG doesn’t show any alpha-wave activity when they’re relaxed aren’t likely to respond significantly to the substance. That means that, for about fifteen percent of the population, we have to find other approaches to liberation.",
+        "By Digital Ignition. The Civil Association of Approved Certifiers in Mexico, ACAMEX for its initials in Spanish, is a results-oriented website of digital transformation strategies, provides a blog for ACAMEX members.",
     },
     {
       offset: 5,
@@ -49,7 +49,7 @@ const state = {
       image: "/Travel-01.jpg",
       aspect: 1.55,
       text:
-        "By cultivating the state of mind that makes it possible for the dazzling ecstatic insights to become permanent and habitual illuminations. By getting to know oneself to the point where one won’t be compelled by one’s unconscious to do all the ugly, absurd, self-stultifying things that one so often finds oneself doing.",
+        "Travel App is a mobile application for travelers, it allows you to capture photos and share them with your friends, so you can also see reviews of other places, add comments and mark your favorites.",
     },
     {
       offset: 7,
@@ -57,7 +57,7 @@ const state = {
       header: "Sistema de Control Escolar Maristas.",
       image: "/Marista-01.jpg",
       aspect: 1.77,
-      text: "Education and enlightenment.",
+      text: "School Control System for the Marist University, is a management system dedicated to providing a communication bridge between teachers, students and career coordinators.",
     },
   ],
   stripes: [

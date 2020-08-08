@@ -29,6 +29,11 @@
 }
 
 @font-face {
+  font-family: "MADE Evolve Sans Bold";
+  src: url("MADE Evolve Sans Bold.otf");
+}
+
+@font-face {
   font-family: "MADE Evolve Sans Light EVO";
   src: url("MADE Evolve Sans Light EVO.otf");
 }
@@ -36,6 +41,11 @@
 @font-face {
   font-family: "MADE Evolve Sans Medium EVO";
   src: url("MADE Evolve Sans Medium EVO.otf");
+}
+
+@font-face {
+  font-family: "MADE Evolve Sans Medium";
+  src: url("MADE Evolve Sans Medium.otf");
 }
 
 @font-face {

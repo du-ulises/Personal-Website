@@ -7,6 +7,7 @@ import { navigate } from "gatsby" //import navigate from gatsby
 import { media } from "../utils/style"
 import "../css/neon.css"
 import ReactHowler from "react-howler"
+import { Typography, Grid } from "@material-ui/core"
 
 const Base = styled.div`
   padding: 0;
@@ -77,6 +78,11 @@ const Base = styled.div`
 function NavBar(props) {
   const [playing, setPlaying] = useState(false)
   const [sound, setSound] = useState(false)
+  const [environment, setEnvironment] = useState({ language: "EN" })
+  const languages = ["EN", "|", "ES"]
+  const handleChangueLanguage = language => {
+    setEnvironment({ ...environment, language })
+  }
   useEffect(() => {
     var marker = document.querySelector("#marker")
     var item = document.querySelectorAll("nav a")
@@ -100,7 +106,7 @@ function NavBar(props) {
   return (
     <Base {...props}>
       <Flex>
-        <Box px={2} width={[1 / 2, 1 / 3, 2 / 6]}>
+        <Box px={2} width={[1 / 2, 1 / 6]}>
           <AnimatePresence>
             <motion.div
               className="title"
@@ -121,7 +127,7 @@ function NavBar(props) {
             </motion.div>
           </AnimatePresence>
         </Box>
-        <Box px={2} width={[0, 2 / 3, 4 / 6]}>
+        <Box px={2} width={[0, 5 / 6]}>
           <motion.div
             className="title"
             initial={{ y: -250 }}
@@ -221,6 +227,60 @@ function NavBar(props) {
               >
                 Honours & Awards
               </a>
+              {languages.map(language => {
+                let spanClass =
+                  environment.language === language ? "active" : ""
+                return (
+                  <motion.li
+                    key={language}
+                    onClick={() => {
+                      if (language !== "|") {
+                        handleChangueLanguage(language)
+                      }
+                    }}
+                    whileHover={{
+                      scale: 1.2,
+                      originX: 0,
+                      color: "#1779ff",
+                    }}
+                    onMouseEnter={() => {
+                      setSound(true)
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <span
+                      className={spanClass}
+                      style={{
+                        color:
+                          environment.language === language
+                            ? props.darkMode
+                              ? "#4353ff"
+                              : "#0101B6"
+                            : props.darkMode
+                            ? "#fff"
+                            : "#000",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          marginBottom: 5,
+                          color:
+                            environment.language === language
+                              ? props.darkMode
+                                ? "#4353ff"
+                                : "#0101B6"
+                              : props.darkMode
+                              ? "#fff"
+                              : "#000",
+                          display: "inline",
+                        }}
+                      >
+                        {language}
+                      </Typography>
+                    </span>
+                  </motion.li>
+                )
+              })}
             </nav>
           </motion.div>
         </Box>
