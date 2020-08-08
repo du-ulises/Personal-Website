@@ -310,6 +310,7 @@ const IndexPage = props => {
             </Typography>
           </Box>
         </Flex>
+    
       </Section>
       <a id="work">Work</a>
       <Section>
